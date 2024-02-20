@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class HelloController {
@@ -18,5 +19,32 @@ public class HelloController {
     public String helloMvc(@RequestParam(value = "name", required = true) String name, Model model) {
         model.addAttribute("name", name);
         return "hello-template";
+    }
+
+    @GetMapping("hello-string")
+    @ResponseBody //응답 body에 return 내용을 직접 넣어준다. 페이지 소스 보기 하면 html 태그가 없다.
+    public String helloString(@RequestParam("name") String name) {
+        return "hello " + name;
+    }
+
+    @GetMapping("hello-api")
+    @ResponseBody
+    public Hello helloApi(@RequestParam("name") String name) { //json 형태로 반환(key-value)
+        Hello hello = new Hello();
+        hello.setName(name);
+        return hello; //객체를 반환하면 json 형태로 반환된다.
+    }
+
+    static class Hello{
+        private String name;
+
+        public String getName() {
+            return name;
+        }
+
+        public String setName(String name) {
+            this.name = name;
+            return name;
+        }
     }
 }
