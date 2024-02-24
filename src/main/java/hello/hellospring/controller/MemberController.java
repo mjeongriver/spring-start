@@ -9,7 +9,7 @@ public class MemberController {
 
     private final MemberService memberService;
 
-    //컴포넌트 스캔과 자동 의존관계 설정
+    //컴포넌트 스캔과 자동 의존관계 설정(생성자 주입을 권장)
     @Autowired
     public MemberController(MemberService memberService) {
         this.memberService = memberService;
