@@ -25,7 +25,6 @@ class MemberServiceIntegrationTest {
     MemberRepository memberRepository; //di
 
     @Test
-    @Commit
     void 회원가입() {
         //given: 뭔가가 주어졌을 때
         Member member = new Member();
